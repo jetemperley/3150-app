@@ -2,7 +2,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View } from 'react-native';
+import ScreenMemeEdit from './ScreenEditMeme';
 import LogInScreen from './ScreenLogIn';
+import ScreenMemeView from './ScreenMemeView';
 import ScreenProfile from './ScreenProfile';
 import ScreenRegister from './ScreenRegister';
 import SplashScreen from './ScreenSplash';
@@ -29,16 +31,15 @@ export default function ScreenEntryStack() {
             <AppStack.Screen 
                 name='UserTabs' 
                 component ={ScreenUserTabs}/>
+            <AppStack.Screen 
+                name='Edit' 
+                component ={ScreenMemeEdit}/>
+			<AppStack.Screen 
+                name='CatMemes' 
+                component ={ScreenMemeView}/>
+            
         </AppStack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

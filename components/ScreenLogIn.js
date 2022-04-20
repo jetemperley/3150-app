@@ -1,12 +1,13 @@
 import { CommonActions, useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import AppButton from "./AppButton";
 import Colors, {styles} from './AppColors';
 import AppIcon from "./AppIcon";
 import AppInputField from "./AppInputField";
 import * as Yup from 'yup'
 import DataManager from "./DataManager";
+import { Dimensions } from "react-native-web";
 
 
 export default function LogInScreen({navigation, route}){
@@ -21,7 +22,7 @@ export default function LogInScreen({navigation, route}){
     };
 
     const schema = Yup.object().shape({
-        Email: Yup.string(),//.email().required(),
+        Email: Yup.string().trim().email().required(),
         Password: Yup.string(),// .required().min(4).max(25),
     });
 
@@ -29,7 +30,11 @@ export default function LogInScreen({navigation, route}){
 
     return (
         
-        <View style = {styles.container}>
+        <View style = {styles.altContainer}>
+            <View style = {styles.comfySpace}>
+                <Image 
+                    source={require('../images/icon.png')}
+                    style={styles.loginLogo}/>
             <Formik 
                 initialValues = {{Email: 'Email', Password:'Password'}}
                 validationSchema ={schema}
@@ -58,17 +63,26 @@ export default function LogInScreen({navigation, route}){
                         <AppInputField 
                             icon = {'account'} 
                             placeholder = {'Email'}
-                            onChangeText ={props.handleChange('Email')}/>
+                            onChangeText ={props.handleChange('Email')}
+                            keyboardType={'email-address'}/>
                         <TouchableOpacity style={[styles.icon, {marginLeft:Colors.padding}]}>
                             <AppIcon icon='account'><Text>?</Text></AppIcon>
                         </TouchableOpacity>
                     </View>
-
+                    {
+                        props.values.Email.length > 0 && props.errors.Email ?
+                        <View style={styles.formRow}>
+                            <Text style={{color: Colors.red}}>{props.errors.Email}</Text>
+                        </View> 
+                        : 
+                        <View style={{height:0}}/>
+                    }
                     <View style={styles.formRow}>
                         <AppInputField 
                             icon = {'key'} 
                             placeholder = {'Password'}
-                            onChangeText ={props.handleChange('Password')}/>
+                            onChangeText ={props.handleChange('Password')}
+                            secure={true}/>
                         <TouchableOpacity style={[styles.icon, {marginLeft:Colors.padding}]}>
                             <AppIcon icon='key'><Text>?</Text></AppIcon>
                         </TouchableOpacity>
@@ -82,12 +96,14 @@ export default function LogInScreen({navigation, route}){
                             <Text>Log in</Text>
                         </AppButton>
                     </View>
-                    <View style={styles.formRow}>
-                        <Text>{props.errors.Password}</Text>
-                    </View>
+                    
+                    
+                        
+                    
                 </>);}}
                 
             </Formik>
+            
             <View style={[styles.formRow, {justifyContent: 'center', alignItems: 'center'}]}>
                 <Text style = {{color: Colors.inputTextColor}}>-OR-</Text>
             </View>
@@ -96,6 +112,7 @@ export default function LogInScreen({navigation, route}){
                         style={{backgroundColor: Colors.primary}} 
                         onPress={register}>
                         <Text>Create account</Text></AppButton>
+            </View>
             </View>
         </View>
         
