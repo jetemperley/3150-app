@@ -1,5 +1,13 @@
-import { StyleSheet, StatusBar } from 'react-native';
-import { Dimensions } from 'react-native';
+
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// styles and colors throughout the app
+
+import { StyleSheet, StatusBar, Dimensions } from 'react-native';
 
 const Colors = {
 

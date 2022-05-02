@@ -1,11 +1,16 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// the stack navigator that is loaded when the user opens the app
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View } from 'react-native';
 import ScreenMemeEdit from './ScreenEditMeme';
 import LogInScreen from './ScreenLogIn';
 import ScreenMemeView from './ScreenMemeView';
-import ScreenProfile from './ScreenProfile';
 import ScreenRegister from './ScreenRegister';
 import SplashScreen from './ScreenSplash';
 import ScreenUserTabs from './ScreenUserTabs';

@@ -1,5 +1,13 @@
-import { View, Image, Text, TouchableOpacity} from "react-native";
 
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// card specificly used for the category flatlist
+
+import { View, Image, Text, TouchableOpacity} from "react-native";
 import { styles } from "./AppColors";
 
 export default function AppCategoryCard({source, title, onPress}){

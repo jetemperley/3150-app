@@ -1,10 +1,15 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// container for the main user screens with a tab nav
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import Colors, { styles } from "./AppColors";
-import AppIcon from "./AppIcon";
 import ScreenAddNewMem from "./ScreenAddNewMem";
 import ScreenAlbum from "./ScreenAlbum";
-import ScreenMemeEdit from "./ScreenEditMeme";
 import ScreenMemeView from "./ScreenMemeView";
 import ScreenProfile from "./ScreenProfile";
 import {MaterialCommunityIcons} from '@expo/vector-icons';

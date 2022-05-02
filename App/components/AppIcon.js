@@ -1,3 +1,12 @@
+
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// circular icon used throughout all screens
+
 import { View, Text} from "react-native";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Colors, { styles } from "./AppColors";

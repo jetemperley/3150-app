@@ -1,3 +1,11 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// common input field used through the app
+
 import {View, TextInput} from 'react-native';
 import Colors, { styles } from './AppColors';
 import AppIcon from './AppIcon';

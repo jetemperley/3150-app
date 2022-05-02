@@ -1,3 +1,9 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
 import { View, Image, Text, TouchableHighlight, TouchableOpacity } from "react-native";
 import Colors, { styles } from "./AppColors";
 import AppIcon from "./AppIcon";
@@ -6,8 +12,7 @@ import DataManager from "./DataManager";
 
 
 export default function ScreenProfile({navigation, route}){
-    // let x = DataManager.getInst().getUser();
-    // console.log(x);
+    
     return(
         <View style = {[styles.container, {justifyContent: 'center'}]}>
             

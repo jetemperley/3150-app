@@ -1,9 +1,14 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// this isnt used, i ran out of time
+
 import { View, Image, Text, TouchableHighlight, TouchableOpacity } from "react-native";
 import AppButton from "./AppButton";
 import { styles } from "./AppColors";
-import AppIcon from "./AppIcon";
-
-
 
 export default function ScreenChangePassword(){
     return(

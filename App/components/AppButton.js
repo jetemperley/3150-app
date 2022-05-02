@@ -1,6 +1,13 @@
 
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// Standard button used thoroughout app
+
 import {View, TouchableOpacity, TouchableHighlight} from 'react-native';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Colors, { styles } from './AppColors';
 
 export default function AppButton(props){

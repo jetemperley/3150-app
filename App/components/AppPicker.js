@@ -1,3 +1,12 @@
+
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// category picker used when creating a memory enrty
+
 import {View, Text, Modal, FlatList, TouchableOpacity} from 'react-native';
 import { useState } from 'react';
 import AppButton from './AppButton';

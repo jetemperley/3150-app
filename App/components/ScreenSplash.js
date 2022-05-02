@@ -1,3 +1,10 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// splash screen
 
 import * as React from 'react';
 import {Image, StyleSheet, Text, View } from 'react-native';
@@ -8,6 +15,7 @@ export default function SplashScreen({navigation}) {
   
 
   React.useEffect(() => {
+    // always automaticly go to next screen
     const unsubscribe = navigation.addListener('focus', () => {
       // the next screen function is calles after 3000 ms
       let id = setInterval(nextScreen, 3000);

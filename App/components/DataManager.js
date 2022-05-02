@@ -1,38 +1,47 @@
-import { TypeOf } from "yup";
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// the datamanager that stores all memory and user information
+// also regulates user access
 
 export default class DataManager{
 
     static inst;
     static users;
     static memes;
-    funcs;
+    updateObserver;
     currentUser;
 
     constructor(){
         console.log("constructing data");
+        // a list of users
         DataManager.users = [
             {
-                id: '44816936',
+                id: '0',
                 username: 'Jacob',
-                email: 'jacob.temperley@students.mq.edu.au',
+                email: 'jacob@gmail.com',
                 password: '1234',
                 profilePic: require("../images/happy-man.png"),
             },
             {
-                id: '0',
+                id: '1',
                 username: 'Guest',
                 email: 'guest@gmail.com',
                 password: '2345',
                 profilePic: require("../images/cat.jpg"),
             },
             {
-                id: '1',
+                id: '2',
                 username: 'Jon',
                 email: 'js@gmail.com',
                 password: '3456',
                 profilePic: require("../images/old.jpg"),
             },
         ];
+        // a list of memes, with each sub array coresponding to a user
         DataManager.memes = [
             [
                 {id: 0,
@@ -63,12 +72,28 @@ export default class DataManager{
                 like: true,
                 category: 'GPa',}
 
-            ], [], []];
-
+            ], [
+                {id: 0,
+                    image: require("../images/nose.jpg"),
+                    date: '1/1/2022',
+                    descrip: "this shoudl only appear on the guest login!",
+                    like: false,
+                    category: 'Jimmy',},
+            ], [
+                {id: 0,
+                    image: require("../images/nose.jpg"),
+                    date: '1/1/2022',
+                    descrip: "this should only appear on jons login!",
+                    like: false,
+                    category: 'Jimmy',},
+            ]];
+        
         this.currentUser = -1;
-        this.funcs = [];
+        // this is the update observer list
+        this.updateObserver = [];
     }
 
+    // get this singleton
     static getInst(){
         if (DataManager.inst == null)
             DataManager.inst = new DataManager();
@@ -76,6 +101,7 @@ export default class DataManager{
         return DataManager.inst;
     }
 
+    // get an array of memes based on the filter
     getMemes(filter){
         // console.log(DataManager.memes[this.currentUser].length);
         let x = DataManager.memes[this.currentUser].filter(filter);
@@ -83,12 +109,16 @@ export default class DataManager{
         return x;
     }
 
+    // add an arbitrary user
     addUser(user){
+        user.email = user.email.toLowerCase();
+        user.id = DataManager.users.length;
         DataManager.users.push(user);
         DataManager.memes.push([]);
 
     }
 
+    // add a meme for this user
     addMeme(meme){
         meme.id = DataManager.memes[this.currentUser].length; 
         DataManager.memes[this.currentUser].push(meme);
@@ -96,11 +126,13 @@ export default class DataManager{
         this.refreshAll();
     }
 
+    // overwrite a meme (used for editing)
     setMeme(meme){
         DataManager.memes[this.currentUser][meme.id]=meme;
         this.refreshAll();
     }
 
+    // remove the supplied meme
     deleteMeme(meme){
         let arr = DataManager.memes[this.currentUser];
         arr[meme.id] = arr[arr.length-1];
@@ -109,6 +141,7 @@ export default class DataManager{
         this.refreshAll()
     }
 
+    // logs the suppled user in
     setUser(email, password){
         email = email.trim();
         email = email.toLowerCase();
@@ -128,6 +161,7 @@ export default class DataManager{
         return this.currentUser;
     }
 
+    // get the index for a user
     getUser(){
         console.log('current user ' + this.currentUser.toString());
         if (this.currentUser == -1)
@@ -137,6 +171,8 @@ export default class DataManager{
         return DataManager.users[this.currentUser];
     }
 
+    // get a list of all the catagories for this user
+    // represented by a list of memes 
     getCategories(){
         let catList = [];
         let done = [];
@@ -156,13 +192,16 @@ export default class DataManager{
         return catList;
     }
 
-    addRefresh(func){
-        if (!this.funcs.includes(func))
-            this.funcs.push(func);
+    // adds a hook to observe and refresh
+    addRefresh(hook){
+        if (!this.updateObserver.includes(hook))
+            this.updateObserver.push(hook);
     }
+
+    // sets all the hooks, causing every component to refresh 
     refreshAll(){
-        for (let i = 0; i < this.funcs.length; i++){
-            this.funcs[i](null);
+        for (let i = 0; i < this.updateObserver.length; i++){
+            this.updateObserver[i](null);
         }
     }
 

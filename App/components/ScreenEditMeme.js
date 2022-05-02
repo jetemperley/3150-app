@@ -1,3 +1,11 @@
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// the screen that appears when the user presses on a memory image
+
 import { TouchableOpacity, View, Image, ImageBackground, Text} from "react-native";
 import AppButton from "./AppButton";
 import Colors, { styles } from "./AppColors";
@@ -9,11 +17,13 @@ import { useState } from "react";
 import DataManager from "./DataManager";
 
 
-export default function ScreenAddNewMem({navigation}){
-    const [cat, setCat] = useState("");
-    const [uri, setUri] = useState(null);
-    const [date, setDate] = useState("");
-    const [desc, setDesc] = useState("");
+export default function ScreenMemeEdit({navigation, route}){
+
+    let meme = route.params.meme;
+    const [cat, setCat] = useState(meme.category);
+    const [uri, setUri] = useState(meme.image);
+    const [date, setDate] = useState(meme.date);
+    const [desc, setDesc] = useState(meme.descrip);
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -23,7 +33,7 @@ export default function ScreenAddNewMem({navigation}){
           quality: 1,
         });
     
-        // console.log(result);
+        console.log(result);
     
         if (!result.cancelled) {
           setUri(result.uri);
@@ -31,10 +41,6 @@ export default function ScreenAddNewMem({navigation}){
     };
 
     const submit = () =>{
-        // console.log(cat);
-        // console.log(uri);
-        // console.log(date);
-        // console.log(desc);
         let meme = {
             id: 0,
             image: uri,
@@ -43,27 +49,21 @@ export default function ScreenAddNewMem({navigation}){
             like: false,
             category: cat,
         };
-        DataManager.getInst().addMeme(meme);
-        clear();
-        navigation.navigate('Memes');
+        DataManager.getInst().setMeme(meme);
+        navigation.goBack();
+    } 
+
+    const deleteMeme = () => {
+        DataManager.getInst().deleteMeme(meme);
+        navigation.goBack();
     }
-
-    const clear = () => {
-        setCat("");
-        setDate("");
-        setDesc("");
-        setUri(null);
-    }
-
-    
-
     return (
         <View style={styles.altContainer}>
             <View style={styles.comfySpace}>
                 <View style={styles.BigInput}>
                     <ImageBackground 
                         style={{flex: 1}}
-                        source={{uri: uri}}>
+                        source={typeof(uri) === "number" ? uri : {uri: uri}}>
                         <TouchableOpacity onPress={pickImage}>
                             <AppIcon 
                             style={{
@@ -99,12 +99,12 @@ export default function ScreenAddNewMem({navigation}){
                     <AppButton 
                         style = {{backgroundColor: Colors.primary}}
                         onPress = {submit}>
-                        <Text>Submit</Text>
+                        <Text>Apply changes</Text>
                     </AppButton>
                 </View>
                 <View style={styles.formRow}>
-                    <AppButton>
-                        <Text>Clear</Text>
+                    <AppButton onPress={deleteMeme}>
+                        <Text>Delete</Text>
                     </AppButton>
                 </View>
             </View>

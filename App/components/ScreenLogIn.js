@@ -1,13 +1,19 @@
-import { CommonActions, useNavigation } from "@react-navigation/native";
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// The main login screen
+
 import { Formik } from "formik";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import AppButton from "./AppButton";
 import Colors, {styles} from './AppColors';
 import AppIcon from "./AppIcon";
 import AppInputField from "./AppInputField";
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 import DataManager from "./DataManager";
-import { Dimensions } from "react-native-web";
 
 
 export default function LogInScreen({navigation, route}){
@@ -15,10 +21,6 @@ export default function LogInScreen({navigation, route}){
     const register = () => {
         console.log('pressed');
         navigation.navigate('Register');
-    };
-
-    const logIn = () => {
-        navigation.navigate('Profile');
     };
 
     const schema = Yup.object().shape({
@@ -40,10 +42,12 @@ export default function LogInScreen({navigation, route}){
                 validationSchema ={schema}
                 onSubmit = {
                     values => {
-                    console.log(values);
+                        
+                    // tries to log in via datamanager
                     let idx = DataManager.getInst().setUser(
                         values.Email, values.Password);
                     
+                    // -1 indicates log in failed
                     if (idx != -1){
                         console.log('user validated');
                         navigation.navigate(
@@ -52,9 +56,6 @@ export default function LogInScreen({navigation, route}){
                                 screen: "Profile",
                                 params: {idx: idx}
                             });
-                    } else {
-                        console.log('user rejected');
-                        // indicate a Email or password is wrong
                     }}
                 } 
             >

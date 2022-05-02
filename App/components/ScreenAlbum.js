@@ -1,7 +1,13 @@
+
+/*  
+    Author: Jacob Temperley
+    Email: jacob.temperley@student.mq.edu.au
+    Student num: 44816936
+*/
+
+// the albums screen
+
 import { FlatList, View } from "react-native";
-import { InteractionManager } from "react-native-web";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-import { useState } from "react";
 import AppCategoryCard from "./AppCategoryCard";
 import { styles } from "./AppColors";
 import DataManager from "./DataManager";
@@ -20,7 +26,6 @@ export default function ScreenAlbum({navigation}){
                 data = {DataManager.getInst().getCategories()}
                 keyExtractor = {(item) => {return item.id;}}
                 renderItem = {({item}) => {
-                    console.log('items');
                     console.log(item);
                     return (
                       	<AppCategoryCard 
