@@ -18,4 +18,4 @@ expo install expo-image-picker
 
 npm install use-state-if-mounted
 
-Any images used are referenced in imageRefs.txt, except the logo, i made that.
+Link to the expo published project: https://expo.dev/@fruitcakedruid/meme-ories
